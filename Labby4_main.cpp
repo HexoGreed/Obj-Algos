@@ -132,7 +132,7 @@ int main() {
         int qc = qh.getCollisions();
         int dc = dh.getCollisions();
 
-        cout << r + 1 << "\t " << lc << "\t " << qc << "\t " << dc << endl;
+        cout << r + 1 << "          " << lc << "          " << qc << "          " << dc << endl;
 
         avgLinear += lc;
         avgQuadratic += qc;
