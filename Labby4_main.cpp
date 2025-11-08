@@ -113,7 +113,7 @@ int main() {
 
 
     cout << "\n\n";
-    cout << "Run   | Linear   | Quadratic | Double\n";
+    cout << "Run | Linear  | Quadratic |  Double\n";
     cout << "--------------------------------------\n";
 
     for (int r = 0; r < runs; r++) {
@@ -132,7 +132,7 @@ int main() {
         int qc = qh.getCollisions();
         int dc = dh.getCollisions();
 
-        cout << r + 1 << "\t| " << lc << "\t| " << qc << "\t| " << dc << endl;
+        cout << r + 1 << "\t " << lc << "\t " << qc << "\t " << dc << endl;
 
         avgLinear += lc;
         avgQuadratic += qc;
