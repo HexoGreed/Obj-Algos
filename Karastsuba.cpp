@@ -1,48 +1,66 @@
+//Hamza
+
 #include <iostream>
 #include <cmath>
 using namespace std;
 
-int karatsuba(int x, int y) {
-    // Base case
-        if (x < 10 || y < 10)
-        return x * y;
+long long karatsuba(long long x, long long y) { // was using int but it overfowed for some inputs
+	if (x < 10 || y < 10) {
+
+		return x * y;
+		//gottta do this bc if i didnt for some reason it would give me an exit code.
+	}
 
 
 
-    // Find the size of nums
-    int n = log10(max(x, y)) + 1;
-    int half = n / 2;
-    int power = pow(10, half);
 
-    // Split x and y
-    int xLeft = x / power;
-    int xRight = x % power;
-    int yLeft = y / power;
-    int yRight = y % power;
 
-    // Recursive calls
-    int P1 = karatsuba(xLeft, yLeft);
-    int P2 = karatsuba(xRight, yRight);
-    int P3 = karatsuba(xLeft + xRight, yLeft + yRight);
 
-    // Combine results
-    return P1 * pow(10, 2 * half) + (P3 - P1 - P2) * pow(10, half) + P2;
+	long long n = log10(max(x, y)) + 1;
+	long long half = n / 2;
+	long long power = pow(10, half);
+
+
+
+	//split
+	long long xleft = x / power;
+	long long xright = x % power;
+
+	long long yleft = y / power;
+	long long yright = y % power;
+
+
+
+
+	//recursion
+	long long leftHalf = karatsuba(xleft, yleft);
+	long long RightHalf = karatsuba(xright, yright);
+	long long sumHalf = karatsuba(xleft + xright, yleft + yright);
+
+
+
+
+	return leftHalf * pow(10, 2 * half) + (sumHalf - leftHalf - RightHalf) * power + RightHalf;
+
 }
 
+
 int main() {
-    int x, y;
-    cout << "Enter first number: ";
-    cin >> x;
-    cout << "Enter second number: ";
-    cin >> y;
 
-    if (x > 123456789 || y > 123456789) {
-        cout << "Numbers must be <= 123,456,789." << endl;
-        return 1;
-    }
+	long long x, y;
+	cout << "Enter two numbers seperated by a space\n";
+	cin >> x >> y;
 
-    cout << "Karatsuba result: " << karatsuba(x, y) << endl;
-    cout << "Normal result: " << x * y << endl;
 
-    return 0;
+	if (x > 123456789 || y > 123456789) {
+
+		cout << "Numbers are too big keep it under 123456789\n\n";
+		return 1;
+	}
+
+
+	cout << "karatsuba: " << karatsuba(x, y) << "\n\n";
+	cout << "normal: " << x * y;
+
+	return 0;
 }
