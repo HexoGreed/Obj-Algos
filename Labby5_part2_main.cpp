@@ -99,6 +99,7 @@ int main() {
 
 		skipList.insert(key, "value" + to_string(i));
 	}
+	skipList.insert(100, "targetValue");
 
 
 	skipList.display();
@@ -109,7 +110,7 @@ int main() {
 	int searchKey = 100; // example
 
 	if (skipList.search(searchKey)) {
-		cout << "Key " << searchKey << "found" << endl;
+		cout << "Key " << searchKey << " found" << endl;
 
 
 
