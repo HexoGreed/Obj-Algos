@@ -1,13 +1,13 @@
-﻿
 
+//Hamza S
 /*
 1.) the reccursion stops when the array = 0 or 1. 0 menas it doesnt exist and 1 means that the only canidate.
 
 2.) if N is odd it isnt paired and carried forward to the next round.
 
-3.) the time complexity is o(n) because each round we scan through the array only once. 
-    then we go onto the second array wich has n/2 elements. 
-	essentialy we have n + n/2 + n/4 ... +1 = o(n)
+3.) the time complexity is o(n) because each round we scan through the array only once.
+    then we go onto the second array wich has n/2 elements.
+    essentialy we have n + n/2 + n/4 ... +1 = o(n)
     its linear.
 
 4.) we can avoid using an extra array B by not actually storing the survivors.
@@ -31,29 +31,39 @@ using namespace std;
 
 // Recursive function to find candidate  (changed for part 5)
 int findCandidate(const vector<int>& A) {
-    int candidate = -1; // 
-    int count = 0;
+    int n = A.size();
 
 
-    for (int x : A) {
+    if (n == 0) {
+        return -1;
+    }
+    if (n == 1) {
+        return A[0];
+    }
 
 
-        if (count == 0) {//if counter = 0 new canidate is chosen
-            candidate = x;
-            count = 1;
-		}
-		else if (x == candidate) { // increment if same as canidate
 
-            count++;
+    vector<int> B;
 
-		}
-		else { // decrement if different
+    for (int i = 0; i < n - 1; i += 2) {
+        if (A[i] == A[i + 1]) {
 
-            count--;
+
+            B.push_back(A[i]); // adds one to b
         }
     }
 
-    return candidate;
+    int canidate = findCandidate(B); //Recursion
+
+    if (canidate != -1) {
+        return canidate;
+    }
+
+    if (n % 2 != 0){ // for odd elements 
+        return A[n - 1];
+    }
+
+    return -1;
 }
 
 // Verify if candidate is majority
@@ -64,7 +74,9 @@ bool isMajority(const vector<int>& A, int candidate) {
 
     for (int x : A) {
 
-        if (x == candidate) count++;
+        if (x == candidate) {
+            count++;
+        }
 
     }
 
@@ -77,7 +89,7 @@ int main() {
     vector<vector<int>> testCases = {
     {2, 2, 2, 2, 4, 4, 4, 4, 4},
     {3, 3, 4, 2, 4, 4, 2, 4, 4},
-
+        {3,3,3,4,4,4,2,2,2},
 	{1, 1, 1, 2, 2}, //added this
 	{ 1, 2, 3, 4, 5 } //for no majoority
     };
